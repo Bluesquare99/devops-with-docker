@@ -1,16 +1,13 @@
-FROM golang:1.16
+FROM golang:1.16-alpine
 
 EXPOSE 8080
 
-ADD ./material-applications/example-backend ./example-backend
+WORKDIR /usr/src/app
 
-WORKDIR ./example-backend
+COPY ./example-backend .
 
-ENV PORT=8080
-ENV REQUEST_ORIGIN=http://localhost:500
+ENV REQUEST_ORIGIN=http://localhost:5000
 
-RUN go test ./...
 RUN go build
-RUN ls
 
-CMD ./server
+CMD ["./server"]

@@ -1,16 +1,17 @@
-FROM node:16
+FROM node:14-alpine
 
 EXPOSE 5000
 
-ADD ./material-applications/example-frontend ./example-frontend
+WORKDIR /usr/src/app
 
-WORKDIR ./example-frontend
+COPY ./example-frontend .
 
-ENV REACT_APP_BACKEND_URL=http://localhost:80/
+ENV REACT_APP_BACKEND_URL=http://localhost:8080
 
-RUN rm ./package-lock.json
 RUN npm install
+
 RUN npm run build
+
 RUN npm install -g serve
 
-CMD serve -s -l 5000 build
+CMD ["serve", "-s", "-l", "5000", "build"]

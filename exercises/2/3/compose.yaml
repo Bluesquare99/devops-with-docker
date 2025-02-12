@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  fe:
+    image: 1-14-fe
+    ports:
+      - 500:5000
+  db:
+    image: postgres:13.2-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_PASSWORD: example
+    container_name: db_redmine
+    volumes:
+      - database:/var/lib/postgresql/data
+  be:
+    image: 1-14-be
+    ports:
+      - 80:8080
+    environment:
+      - POSTGRES_HOST=postgres
+      - REDIS_HOST=redis
+    depends_on:
+      - db
+      
+  redis:
+    image: redis
