@@ -1,1 +1,0 @@
-Ubuntu's image size is 83mb, whereas Alpine's is 15.7mb
