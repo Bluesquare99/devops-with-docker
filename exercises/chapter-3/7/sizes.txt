@@ -1,0 +1,2 @@
+frontend-project: 570MB
+backend-project: 544MB
